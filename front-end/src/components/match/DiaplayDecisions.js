@@ -2,7 +2,7 @@ import Decision from "../../logic/Decision"
 import { useState } from "react"
 
 
-const  DisplayDecisions = ({getDecisionEndPoint, decisionStatus})=>{
+const  DisplayDecisions = ({getDecisionEndPoint})=>{
     const callDecisions = new Decision()
     const [decision,setDecision] = useState("s1")
     const [title, setTitle] = useState(callDecisions.getTitles(decision))

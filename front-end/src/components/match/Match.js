@@ -9,37 +9,24 @@ import Passing from "../../logic/Passing"
 import ScoreBoard from "./ScoreBoard";
 import GameEventDisplay from "./GameEventsDisplay"
 
-const Match = ()=>{
-
-    const player1 = { name: "John", position: "gk", ovr: 70 ,positioning: 60, diving: 70, reflexes:50};
-    const player2 = { name: "John", position: "gk", ovr: 65};
-    const player3 = { name: "John", position: "df", ovr: 77, slideTackle: 50, standTackle: 80};
-    const player4 = { name: "John", position: "df", ovr: 67};
-    const player5 = { name: "John", position: "df", ovr: 73};
-    const player6 = { name: "John", position: "mid", ovr: 80};
-    const player7 = { name: "John", position: "mid", ovr: 70};
-    const player8 = { name: "John", position: "st", ovr: 78, shotPower:60, finishing: 60, attPosition: 67};
-    console.log(Scoring(player8,player3, player1))
-    const teamA = {name: "OSFP", players: [player1, player2, player3, player4, player5, player6, player7, player8]} 
-    const teamB = {name: "PAO", players: [player1, player2, player3, player4, player5, player6, player7, player8]} 
+const Match = ({match, ourPlayer})=>{
+    if(!match && !ourPlayer){
+        return
+    }
     const [time, setTime] = useState({m:0, s:0})
-    const [teamAPlayers, setTeamAPlayers] = useState(TeamReady(teamA.players))
-    const [teamBPlayers, setTeamBPlayers] = useState(TeamReady(teamB.players))
-    const [teamAScore, setTeamAScore] = useState(0)
-    const [teamBScore, setTeamBScore] = useState(0)
+    const [teamHomePlayers, setTeamHomePlayers] = useState(TeamReady(match.teamHome.players))
+    const [teamAwayPlayers, setTeamAwayPlayers] = useState(TeamReady(match.teamAway.players))
+    const [teamHomeScore, setTeamHomeScore] = useState(0)
+    const [teamAwayScore, setTeamAwayScore] = useState(0)
     const [playerReward, setPlayerReward] = useState(0)
     const [decisionStatus, setDecisionStatus] = useState(false)
-    const [gameStatus, setGameStatus] = useState(false)
-    const [startTimer,setStartTimer] = useState(true)
+    // const [gameStatus, setGameStatus] = useState(false)
+    // const [startTimer,setStartTimer] = useState(true)
     const [isGameEnded, setGameEnded] = useState(false)
     const [gameEventHistory, setGameEventHistory] = useState([])
     // let btnState = useRef(1)
     const [btnState, setBtnState] = useState(1)
-
     let intervStorage = useRef()
-
-    const teamAOvr = 56;
-    const teamBOvr = 60;
     const [eventArray, setEventArray] = useState([])
     const eventHistoryKept = useRef(0)
     const timeout = useRef(0)
@@ -47,10 +34,10 @@ const Match = ()=>{
 
 
     const start = ()=>{
-        run();
+        // run();
         // intervStorage = setInterval(run,500)
         // setIntervStorage(setInterval(run,500))
-        intervStorage.current = setInterval(run,30) // can we do this?
+        intervStorage.current = setInterval(run(),30) // can we do this?
     }
     const pause = ()=>{
         clearInterval(intervStorage.current)
@@ -61,7 +48,12 @@ const Match = ()=>{
 
     }
     useEffect(()=>{
-        setEventArray(populateEventArray())        
+        setEventArray(populateEventArray()) 
+        return () => {
+            clearTimeout(timeout.current);
+            clearInterval(intervStorage.current);
+          };
+
     },[])
 
     const startGame = ()=>{
@@ -124,10 +116,10 @@ const Match = ()=>{
     }
     const populateEventArray = ()=>{
         let populatedEventArray = ["DN", "DN", "DN","DN"]
-        if((teamBOvr - 5) < teamAOvr && teamAOvr < (teamBOvr + 5) ){
+        if((match.teamAway.ovr  - 5) <= match.teamHome.ovr && match.teamHome.ovr  <= (match.teamAway.ovr + 5) ){
             populatedEventArray = [...populatedEventArray, "TA", "TA", "TB", "TB", "O", "O"]
         }
-        else if (teamAOvr> (teamBOvr + 5)){
+        else if (match.teamHome.ovr > (match.teamAway.ovr  + 5)){
             populatedEventArray = [...populatedEventArray, "TA", "TA", "TA", "TB", "O", "O"]
         }
         else {
@@ -136,10 +128,23 @@ const Match = ()=>{
         return populatedEventArray
     }
 
+    const pickDefenderToCompit = ()=>{
+        if(match.teamHome.players.includes(ourPlayer)){
+            return teamAwayPlayers.def[Math.floor(Math.random()*teamHomePlayers.def.length)]
+        }
+        return teamAwayPlayers.def[Math.floor(Math.random()*teamHomePlayers.def.length)]
+    }
+    const pickGKToCompit = () =>{
+        if(match.teamHome.players.includes(ourPlayer)){
+            return teamAwayPlayers.gk
+        }
+        return teamHomePlayers.gk
+    }
+
 
     const pickRandomEvent = () =>{
         // do stuff
-        // setTeamBScore(prevscore => prevscore + 1)
+        // setTeamAwayScore(prevscore => prevscore + 1)
         const timer =(Math.floor(Math.random()*(10 - 3 + 1)) + 3) * 1500 // what does this timer do???
         console.log({timer}) 
         if(eventArray && !pauseGameStatus.current){
@@ -147,18 +152,18 @@ const Match = ()=>{
             const i = Math.floor(Math.random()*10)
             console.log("random event number",{i})
             if(eventArray[i] === "TA"){
-                // setTeamAScore(prevscore=>prevscore+1)
-                newEvent["children"] = `${teamA.name} GOAL !!!!!!`
+                // setTeamHomeScore(prevscore=>prevscore+1)
+                newEvent["children"] = `${match.teamHome.name} GOAL !!!!!!`
                 newEvent["color"] = 'red'
                 newEvent["position"] = 'right'
                 console.log("red team scores game event gameEventHistory:", {gameEventHistory})
                 console.log("red team scores game event newEvent:", {newEvent})
                 console.log("I'm the state when red scores", [...gameEventHistory, newEvent])
                 setGameEventHistory((prevEventHistory) => [...prevEventHistory, newEvent])
-                setTeamAScore((prevTeamScore) => prevTeamScore+1)
+                setTeamHomeScore((prevTeamScore) => prevTeamScore+1)
             }
             else if( eventArray[i] === "TB"){
-                newEvent["children"] = `${teamB.name} GOAL !!!!!!`
+                newEvent["children"] = `${match.teamAway.name} GOAL !!!!!!`
                 newEvent["color"] = 'blue'
                 newEvent["position"] = 'left'
                 console.log("blue team scores game event gameEventHistory:", {gameEventHistory})
@@ -166,7 +171,7 @@ const Match = ()=>{
 
                 console.log("I'm the state when blue scores" , [...gameEventHistory, newEvent])
                 setGameEventHistory((prevEventHistory) => [...prevEventHistory, newEvent])
-                setTeamBScore((prevTeamScore) => prevTeamScore+1)
+                setTeamAwayScore((prevTeamScore) => prevTeamScore+1)
             }
             else if( eventArray[i] === "O"){
                 console.log("It's an opportunity!!!!!!!!!")          
@@ -187,6 +192,8 @@ const Match = ()=>{
         
     }
 
+
+
  
 
  
@@ -195,18 +202,18 @@ const Match = ()=>{
     const getDecisionEndPoint = (decision) =>{
         const newEvent = {dot:time.m}
         if (decision === "Shoot"){
-            let results = Scoring(player8,player3, player1);
+            let results = Scoring(ourPlayer,pickDefenderToCompit(), pickGKToCompit());
             if(results){
-                    newEvent["children"] = `${player1.name} Scored!!!!!!` 
-                if(teamA.players.includes(player1)){
+                    newEvent["children"] = `${ourPlayer.name} Scored!!!!!!` 
+                if(match.teamHome.players.includes(ourPlayer)){
                     console.log("team a scored")
 
-                    setTeamAScore(teamAScore +1)
+                    setTeamHomeScore(teamHomeScore +1)
                     newEvent["color"] = 'red'
                     newEvent["position"] = 'right'
                 }else{
                     console.log("team b scored")
-                    setTeamBScore(teamBScore +1)
+                    setTeamAwayScore(teamAwayScore +1)
                     newEvent["color"] = 'blue'
                     newEvent["position"] = 'left'
                     
@@ -215,16 +222,14 @@ const Match = ()=>{
                 setGameEventHistory((prevEventHistory) => [...prevEventHistory,newEvent])
 
             }
-            if(teamA.players.includes(player1)){
-                setTeamAScore(teamAScore +1)
+            if(match.teamHome.players.includes(ourPlayer)){
                 newEvent["color"] = 'red'
                 newEvent["position"] = 'right'
             }else{
-                setTeamBScore(teamBScore +1)
                 newEvent["color"] = 'blue'
                 newEvent["position"] = 'left'
             }
-            newEvent["children"] = `${player1.name} missed an opportunity`
+            newEvent["children"] = `${ourPlayer.name} missed an opportunity`
             console.log("either A or B team missed a shot", [...gameEventHistory,newEvent])
 
 
@@ -232,21 +237,21 @@ const Match = ()=>{
             
                     
         }else{ // descison is not shoot but pass 
-            let results = Passing(player8,player3);
+            let results = Passing(ourPlayer,pickDefenderToCompit());
             if(results){
-                if(teamA.players.includes(player8)){
-                    if(Scoring(teamAPlayers.st[0], teamBPlayers.def[0], teamBPlayers.gk)){
+                if(match.teamHome.players.includes(ourPlayer)){
+                    if(Scoring(teamHomePlayers.st[0], teamAwayPlayers.def[0], teamAwayPlayers.gk)){
                         
-                        newEvent["children"] = `${teamAPlayers.st[0]} Scored. Thanks to your assist` 
+                        newEvent["children"] = `${teamHomePlayers.st[0].name} Scored. Thanks to your assist` 
                         newEvent["color"] = 'red'
                         newEvent["position"] = 'right'
                         console.log("Team A passed and did score", [...gameEventHistory,newEvent])
 
-                        setTeamAScore(prevTeamAScore => prevTeamAScore + 1)
+                        setTeamHomeScore(prevTeamAScore => prevTeamAScore + 1)
                         setGameEventHistory((prevEventHistory) => [...prevEventHistory,newEvent])
                     }else {
                         
-                        newEvent["children"] = `${teamAPlayers.st[0]} missed the goal` 
+                        newEvent["children"] = `${teamHomePlayers.st[0].name} missed the goal` 
                         newEvent["color"] = 'red'
                         newEvent["position"] = 'right'
                         console.log("Team A passed and didn't score", [...gameEventHistory,newEvent])
@@ -255,24 +260,24 @@ const Match = ()=>{
                     }
                 }
                 else{
-                    if(Scoring(teamBPlayers.st[0], teamAPlayers.def[0], teamAPlayers.gk)){
-                        newEvent["children"] = `${teamBPlayers.st[0]} Scored. Thanks to your assist` 
+                    if(Scoring(teamAwayPlayers.st[0], teamHomePlayers.def[0], teamHomePlayers.gk)){
+                        newEvent["children"] = `${teamAwayPlayers.st[0].name} Scored. Thanks to your assist` 
                         newEvent["color"] = 'blue'
                         newEvent["position"] = 'left'
                         console.log("b team passed and scored", [...gameEventHistory,newEvent])
                         setGameEventHistory((prevEventHistory) => [...prevEventHistory,newEvent])
-                        setTeamBScore((prevTeamBScore) => prevTeamBScore + 1)
+                        setTeamAwayScore((prevTeamBScore) => prevTeamBScore + 1)
                     }else {
                         newEvent["color"] = 'blue'
                         newEvent["position"] = 'left'
-                        newEvent["children"] = `${teamBPlayers.st[0]} missed the goal` 
+                        newEvent["children"] = `${teamAwayPlayers.st[0].name} missed the goal` 
                         console.log("B team passed and did not score", [...gameEventHistory,newEvent])
                         setGameEventHistory((prevEventHistory) => [...prevEventHistory,newEvent])
 
                     }
                 }
             }
-            if(teamA.players.includes(player1)){
+            if(match.teamHome.players.includes(ourPlayer)){
                 newEvent["color"] = 'red'
                 newEvent["position"] = 'right'
             }else{
@@ -290,6 +295,8 @@ const Match = ()=>{
 
     const finishGame = ()=>{
 
+
+
     }
 
 
@@ -300,14 +307,14 @@ const Match = ()=>{
     return(
        
         <div className="flex flex-col items-center">
-            <ScoreBoard homeTeam={teamA} awayTeam={teamB} homeTeamScore={teamAScore} awayTeamScore={teamBScore}/>
+            <ScoreBoard homeTeam={match.teamHome} awayTeam={match.teamAway} homeTeamScore={teamHomeScore} awayTeamScore={teamAwayScore}/>
             <div className="flex items-start">
-                <TeamDisplay team={teamA}/>
+                <TeamDisplay team={match.teamHome}/>
                 {isGameEnded ? <h2>Finished</h2> : <Timer time = {time} />}
                 <GameEventDisplay gameEvents={gameEventHistory}/>
-                <TeamDisplay team={teamB}/>
+                <TeamDisplay team={match.teamHome}/>
             </div>
-            {decisionStatus? <DisplayDecisions getDecisionEndPoint = {getDecisionEndPoint} decisionStatus={decisionStatus}/> : null}
+            {decisionStatus? <DisplayDecisions getDecisionEndPoint = {getDecisionEndPoint}/> : null}
             {btnState === 1?(
                 <button className=" btn" onClick={startGame}>Start Game</button>
             ): btnState === 2?(
@@ -334,10 +341,10 @@ export default Match
 //     const teamA = {name: "OSFP", players: [player1, player2, player3, player4, player5, player6, player7, player8]} 
 //     const teamB = {name: "PAO", players: [player1, player2, player3, player4, player5, player6, player7, player8]} 
 //     const [time, setTime] = useState({m:0, s:0})
-//     const [teamAPlayers, setTeamAPlayers] = useState(TeamReady(teamA.players))
-//     const [teamBPlayers, setTeamBPlayers] = useState(TeamReady(teamB.players))
-//     const [teamAScore, setTeamAScore] = useState(0)
-//     const [teamBScore, setTeamBScore] = useState(0)
+//     const [teamHomePlayers, setTeamHomePlayers] = useState(TeamReady(teamA.players))
+//     const [teamAwayPlayers, setTeamAwayPlayers] = useState(TeamReady(teamB.players))
+//     const [teamHomeScore, setTeamHomeScore] = useState(0)
+//     const [teamAwayScore, setTeamAwayScore] = useState(0)
 //     const [playerReward, setPlayerReward] = useState(0)
 //     const [decisionStatus, setDecisionStatus] = useState(false)
 //     const [gameStatus, setGameStatus] = useState(true)
@@ -348,7 +355,7 @@ export default Match
 
 //     const getScore= (team) =>{
 //         if(team === "A"){
-//             setTeamAScore(teamAScore+1)
+//             setTeamHomeScore(teamAScore+1)
 //         }else{
 //             setTeamBScore(teamBScore+1)
 //         }
