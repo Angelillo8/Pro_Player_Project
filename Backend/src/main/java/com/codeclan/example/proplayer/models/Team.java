@@ -52,7 +52,7 @@ public class Team implements Serializable {
     @Column(name = "points")
     private Integer points;
 
-    @JsonIgnoreProperties({"teams"})
+    @JsonIgnoreProperties({"teams", "matches"})
     @ManyToOne
     @JoinColumn(name = "league_id", nullable = false)
     private League league;

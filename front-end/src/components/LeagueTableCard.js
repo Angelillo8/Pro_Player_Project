@@ -2,9 +2,13 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import LeagueTable from "./LeagueTable";
 import PlayerDevelopment from "./PlayerDevelopment";
+import AllMatchesOfWeek from "./weeklyMatches/AllMatchesOfWeek";
 
-const LeagueTableCard = () => {
+const LeagueTableCard = ({ourPlayer, date}) => {
+
+
   return (
+    <>{ourPlayer&&(
     <div className="m-auto mt-6 mb-6 w-10/12">
 
     <div className="grid grid-cols-3  grid-rows-2 gap-2 gap-y-7">
@@ -12,24 +16,23 @@ const LeagueTableCard = () => {
         <div className="card shadow-xl h-auto  ">
           <figure className="px-10 pt-7">
             {/* <img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" className="rounded-xl" /> */}
-            <img src="https://fifastatic.fifaindex.com/FIFA23/teams/light/10.png" alt="Logo"  />
+            <img src={ourPlayer.team.badge} alt="Logo"  />
           </figure>
           <div className="card-body items-center text-center">
             <p>Saturday, Feb 10, 2023</p>
             <p>AWAY vs Arsenal</p>
             <div className="card-actions">
-              <Link to="/match" className="btn btn-primary">Play Match</Link>
+              <Link to="/match/" className="btn btn-primary">Play Match</Link>
             </div>
           </div>
         </div>
 
         <div className="card  shadow-xl col-span-2  ">
           <figure className="px-10 pt-10">
-            {/* <img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" className="rounded-xl" /> */}
           </figure>
           <div className="card-body items-center text-center">
             <h2 className="card-title">News</h2>
-            <p>Player of the Month</p>
+            <AllMatchesOfWeek date={date}/>
             <div className="card-actions"></div>
           </div>
         </div>
@@ -73,6 +76,8 @@ const LeagueTableCard = () => {
       
     </div>
     </div>
+    )}
+    </>
   );
 };
 

@@ -41,7 +41,6 @@ const LeaguesPage = () => {
     return (
         <>
             <div className="m-auto mt-6 mb-6 w-10/12">
-                <h1>Leagues:</h1>
                 <div className="flex flex-wrap gap-7 justify-center">{leaguesList}</div>
                 <div className="flex flex-wrap gap-3 justify-center mt-6">{selectedLeague && teamsByLeagueList}</div>
             </div>

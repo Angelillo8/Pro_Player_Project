@@ -8,23 +8,21 @@ import Scoring from "../../logic/Scoring";
 import Passing from "../../logic/Passing"
 import ScoreBoard from "./ScoreBoard";
 import GameEventDisplay from "./GameEventsDisplay"
+import { useParams } from "react-router-dom";
+import ProplayerService from "../../services/ProplayerService";
 
-const Match = ({match, ourPlayer})=>{
-    if(!match && !ourPlayer){
-        return
-    }
+const Match = ()=>{
+    let id = useParams()
+    const [match,setMatch] = useState()
     const [time, setTime] = useState({m:0, s:0})
-    const [teamHomePlayers, setTeamHomePlayers] = useState(TeamReady(match.teamHome.players))
-    const [teamAwayPlayers, setTeamAwayPlayers] = useState(TeamReady(match.teamAway.players))
+    const [teamHomePlayers, setTeamHomePlayers] = useState()
+    const [teamAwayPlayers, setTeamAwayPlayers] = useState()
     const [teamHomeScore, setTeamHomeScore] = useState(0)
     const [teamAwayScore, setTeamAwayScore] = useState(0)
     const [playerReward, setPlayerReward] = useState(0)
     const [decisionStatus, setDecisionStatus] = useState(false)
-    // const [gameStatus, setGameStatus] = useState(false)
-    // const [startTimer,setStartTimer] = useState(true)
     const [isGameEnded, setGameEnded] = useState(false)
     const [gameEventHistory, setGameEventHistory] = useState([])
-    // let btnState = useRef(1)
     const [btnState, setBtnState] = useState(1)
     let intervStorage = useRef()
     const [eventArray, setEventArray] = useState([])
@@ -32,88 +30,7 @@ const Match = ({match, ourPlayer})=>{
     const timeout = useRef(0)
     const pauseGameStatus = useRef(false)
 
-
-    const start = ()=>{
-        // run();
-        // intervStorage = setInterval(run,500)
-        // setIntervStorage(setInterval(run,500))
-        intervStorage.current = setInterval(run(),30) // can we do this?
-    }
-    const pause = ()=>{
-        clearInterval(intervStorage.current)
-    }
-    const stop = ()=>{
-        clearInterval(intervStorage.current)
-        setTime({m:0, s:0})
-
-    }
-    useEffect(()=>{
-        setEventArray(populateEventArray()) 
-        return () => {
-            clearTimeout(timeout.current);
-            clearInterval(intervStorage.current);
-          };
-
-    },[])
-
-    const startGame = ()=>{
-        console.log("start game event added",[...gameEventHistory,{dot: "Start Game"}] )
-        setGameEventHistory((prevGameEventHistory) =>[...prevGameEventHistory,{dot: "Start Game"}])
-        // btnState.current = 2
-        setBtnState(2)
-        if(eventArray){
-
-        }
-        start()
-        pauseGameStatus.current = false
-        timeout.current = setTimeout(pickRandomEvent, 1000)
-        return () => {
-            clearTimeout(timeout.current)
-        }
-    }
-
-    const restartGame = ()=>{
-        // btnState.current = 2
-        setBtnState(2)
-        start()
-        pauseGameStatus.current = false
-        timeout.current = setTimeout(pickRandomEvent, 1000)
-        return () => {
-            clearTimeout(timeout.current)
-        }
-    }
-
-    const pauseGame = ()=>{
-        pause()
-        clearTimeout(timeout.current)
-        // btnState.current = 3
-        setBtnState(3)
-        pauseGameStatus.current = true
-        console.log(btnState)
-    }
-    var updateM = time.m, updateS = time.s;
-    const run = ()=>{
-            
-            if (updateS === 59){
-                updateS = 0
-                updateM++
-            }
-            updateS++
-            
-            if(updateM >= 90){
-                clearTimeout(timeout.current)
-                pauseGameStatus.current = true
-                setGameEnded(true)
-                console.log("game ending ",[...gameEventHistory,{dot: "Finished"}])
-                setGameEventHistory([...gameEventHistory,{dot: "Finished"}])
-                // btnState.current = 4
-                setBtnState(4)
-                stop()
-                return 
-            }else if(!isGameEnded){
-                return setTime({m: updateM, s: updateS})
-            }
-    }
+    
     const populateEventArray = ()=>{
         let populatedEventArray = ["DN", "DN", "DN","DN"]
         if((match.teamAway.ovr  - 5) <= match.teamHome.ovr && match.teamHome.ovr  <= (match.teamAway.ovr + 5) ){
@@ -126,6 +43,107 @@ const Match = ({match, ourPlayer})=>{
             populatedEventArray = [...populatedEventArray, "TA", "TB", "TB", "TB", "O", "O"]
         }
         return populatedEventArray
+    }
+
+    
+    const getUserPlayer = ()=>{
+
+    }
+
+
+    useEffect(()=>{
+        console.log("game started !!!!!!!!!!!!!!!!!!")
+        ProplayerService.getOneMatch(id)
+            .then(match=>setMatch(match), setTeamAwayPlayers(TeamReady(match.teamAway.players)), setTeamHomePlayers(TeamReady(match.teamHome.players)),
+            console.log("that is what we receive from DB", match))
+        setEventArray(populateEventArray()) 
+        return () => {
+            clearTimeout(timeout.current);
+            clearInterval(intervStorage.current);
+          };
+
+    },[])
+
+    console.log("those are the match info", match)
+    if(!match){
+        return
+    }
+    const startTimer = ()=>{
+        run();
+        // intervStorage = setInterval(run,500)
+        // setIntervStorage(setInterval(run,500))
+        intervStorage.current = setInterval(run,30) // can we do this?
+    }
+    const pauseTimer = ()=>{
+        clearInterval(intervStorage.current)
+    }
+    const stopTimer = ()=>{
+        clearInterval(intervStorage.current)
+        setTime({m:0, s:0})
+
+    }
+
+
+    const startGame = ()=>{
+        console.log("start game event added",[...gameEventHistory,{dot: "Start Game"}] )
+        setGameEventHistory((prevGameEventHistory) =>[...prevGameEventHistory,{dot: "Start Game"}])
+        // btnState.current = 2
+        setBtnState(2)
+        if(eventArray){
+
+        }
+        startTimer()
+        pauseGameStatus.current = false
+        timeout.current = setTimeout(pickRandomEvent, 1000)
+        return () => {
+            clearTimeout(timeout.current)
+        }
+    }
+
+    const restartGame = ()=>{
+        // btnState.current = 2
+        setBtnState(2)
+        startTimer()
+        pauseGameStatus.current = false
+        timeout.current = setTimeout(pickRandomEvent, 1000)
+        return () => {
+            clearTimeout(timeout.current)
+        }
+    }
+
+    const pauseGame = ()=>{
+        pauseTimer()
+        clearTimeout(timeout.current)
+        // btnState.current = 3
+        setBtnState(3)
+        pauseGameStatus.current = true
+        console.log(btnState)
+    }
+
+    const endGame = ()=>{
+        pauseTimer()
+        clearTimeout(timeout.current)
+        pauseGameStatus.current = true
+        setGameEnded(true)
+        setBtnState(4)
+    }
+    var updateM = time.m, updateS = time.s;
+    const run = ()=>{
+            
+            if (updateS === 59){
+                updateS = 0
+                updateM++
+            }
+            updateS++
+            
+            if(updateM >= 90){
+                console.log("game ending ",[...gameEventHistory,{dot: "Finished"}])
+                setGameEventHistory([...gameEventHistory,{dot: "Finished"}])
+                endGame()
+                return 
+            }else if(!isGameEnded){
+                return setTime({m: updateM, s: updateS})
+            }
     }
 
     const pickDefenderToCompit = ()=>{
@@ -175,7 +193,7 @@ const Match = ({match, ourPlayer})=>{
             }
             else if( eventArray[i] === "O"){
                 console.log("It's an opportunity!!!!!!!!!")          
-                pause()
+                pauseGame()
                 clearTimeout(timeout.current)
                 pauseGameStatus.current = true
                 setDecisionStatus((prevState) => true)

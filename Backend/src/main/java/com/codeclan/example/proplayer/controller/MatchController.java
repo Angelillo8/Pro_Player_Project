@@ -27,7 +27,10 @@ public class MatchController {
     public ResponseEntity<Optional<Match>> getMatch(@PathVariable Long id) {
         return new ResponseEntity(matchRepository.findById(id), HttpStatus.OK);
     }
-
+    @GetMapping(value="/matches/date/{date}")
+    public ResponseEntity<Optional<Match>> getMatch(@PathVariable String date) {
+        return new ResponseEntity(matchRepository.findByDate(date), HttpStatus.OK);
+    }
     @PostMapping("/matches")
     public ResponseEntity<Match> postMatch(@RequestBody Match match){
         matchRepository.save(match);
@@ -41,5 +44,7 @@ public class MatchController {
         matchRepository.save(matchToUpdate);
         return new ResponseEntity<>(matchToUpdate, HttpStatus.OK);
     }
+
+
 
 }

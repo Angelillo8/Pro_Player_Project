@@ -109,7 +109,7 @@ public class Player implements Serializable {
     private Integer assistance ;
     @Column(name = "appearances")
     private Integer appearances ;
-    @JsonIgnoreProperties({"players"})
+    @JsonIgnoreProperties({"players", "matches"})
     @ManyToOne
     @JoinColumn(name="team_id", nullable=false)
     private Team team;
