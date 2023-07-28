@@ -79,6 +79,7 @@ const ProplayerService = {
   },
 
   getOneMatch(id) {
+    console.log(id)
     return fetch(baseURL + "matches/" + id)
       .then(res => res.json());
   },
