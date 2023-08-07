@@ -31,8 +31,8 @@ const GameGenerator = (teams, season) => {
             console.log("year", year, "month", month, "day", day)
             let dateString = `${year}-${month}-${day}`
             console.log(dateString)
-            let newDate = new Date(dateString)
-            allDates.push(newDate)
+            // let newDate = new Date(dateString)
+            allDates.push(dateString)
         }
         return allDates
     }

@@ -103,13 +103,13 @@ function SubmitForm({ createSeason, generateAllGames, getOurPlayer }) {
     event.preventDefault();
     const ourPlayer = generateplayer(formData)
     ProplayerService.postNewPlayer(ourPlayer)
-      .then(ourPlayer => getOurPlayer(ourPlayer))
+      .then(player => (getOurPlayer(player),  generateAllGames(), navigate(`/home/${player.id}`)))
     // console.log(ourPlayer)
     // createSeason()
-    generateAllGames()
+    // generateAllGames()
     // Process form submission or send data to an API
     // console.log(formData);
-    navigate("/home")
+    // navigate(`/home/${ourPla}`)
   };
 
   return (

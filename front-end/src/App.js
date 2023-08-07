@@ -51,8 +51,12 @@ function App() {
 
   const getOurPlayer = (player) => {
     setOurPlayer(player)
+    window.localStorage.setItem("ourPlayer", JSON.stringify(player))
   };
 
+  useEffect(()=>{
+    if (JSON.parse(localStorage.getItem("ourPlayer")) != null) setOurPlayer(JSON.parse(localStorage.getItem("ourPlayer")))
+  },[])
   const createSeason = () => {
     const startingSeason = { year: 2022 }
     if (!season.current) {
@@ -96,9 +100,7 @@ function App() {
           generateAllGames={generateAllGames}
           getOurPlayer={getOurPlayer}
         />} />
-{  data ?     <Route path="/home" element={<HomePage 
-          ourPlayer={ourPlayer} date={allMatchDates[0]}
-        />} />: null}
+     <Route path="/home/:id" element={<HomePage />} />
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/squad" element={<SquadPage squad={teams[1]} />} />
         <Route path="/player" element={<PlayerSeasonStats />} />

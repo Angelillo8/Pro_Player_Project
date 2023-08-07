@@ -1,4 +1,4 @@
-const ScoreBoard = ({homeTeam, awayTeam, homeTeamScore, awayTeamScore})=>{
+const ScoreBoard = ({homeTeam, awayTeam, score})=>{
 
     return(
         <div  className="items-center w-screen px-20" >
@@ -7,7 +7,7 @@ const ScoreBoard = ({homeTeam, awayTeam, homeTeamScore, awayTeamScore})=>{
             <img src = {homeTeam.badge} className="w-14"/>
             <h1>{homeTeam.name}</h1>
             </div>
-            <h1>{homeTeamScore}  :  {awayTeamScore}</h1>
+            <h1>{score.homeTeam}  :  {score.awayTeam}</h1>
             <div className="flex grow text-center items-center">
             <h1>{awayTeam.name}</h1>
             <img src={awayTeam.badge} className="w-14"/>
