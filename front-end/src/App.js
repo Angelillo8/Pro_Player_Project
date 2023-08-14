@@ -100,7 +100,7 @@ function App() {
           generateAllGames={generateAllGames}
           getOurPlayer={getOurPlayer}
         />} />
-     <Route path="/home/:id" element={<HomePage />} />
+        <Route path="/home/:id" element={<HomePage />} />
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/squad" element={<SquadPage squad={teams[1]} />} />
         <Route path="/player" element={<PlayerSeasonStats />} />

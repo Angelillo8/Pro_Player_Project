@@ -120,6 +120,11 @@ function SubmitForm({ createSeason, generateAllGames, getOurPlayer }) {
           <div className="card-body items-center text-center">
             <h2 className="card-title">WELCOME TO PROPLAYER</h2>
             <p>Create your player</p>
+            <ul class="steps">
+              <li class="step step-primary">Player</li>
+              <li class="step step-primary">Team</li>
+              <li class="step">Stats</li>
+            </ul>
             <form className="" onSubmit={handleSubmit}>
               <label>
                 <div className="form-control">
@@ -135,8 +140,8 @@ function SubmitForm({ createSeason, generateAllGames, getOurPlayer }) {
 
                 <div className="form-control">
                   <label className="input-group">
-                    <span className="w-24">Age</span>
-                    <input type="text" placeholder="Enter the age" className="input input-bordered w-52" name="age" value={formData.age} onChange={handleInputChange} />
+                    <span className="w-24">DoB</span>
+                    <input type="date" placeholder="Enter the age" className="input input-bordered w-52" name="age" value={formData.age} onChange={handleInputChange} />
                   </label>
                 </div>
               </label>

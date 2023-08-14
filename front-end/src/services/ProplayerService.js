@@ -26,7 +26,7 @@ const ProplayerService = {
   },
 
   updatePlayer(payload) {
-    return fetch(baseURL + "players/" + payload._id, {
+    return fetch(baseURL + "players/" + payload.id, {
       method: 'PUT',
       body: JSON.stringify(payload),
       headers: {
