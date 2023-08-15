@@ -1,47 +1,87 @@
 import { useState,useEffect } from "react"
 
 class Decision{
-dTree = {
-        node: "s1",
-        title: "Here is your opportunity to shine. Take the right decision to help your team win: ",
-        children: [
-            {
-                node: "s2",
-                title: "Shoot to score for your team",
-                endType: "Shoot"
-            },
-            {
-                node: "s3",
-                title: "Pass the ball to one of your teammates>",
-                children:[
-                    {
-                        node: "s4",
-                        title: "Pass the ball to Pedro",
-                        endType: "Pass"
-                    },
-                    {
-                        node: "s5",
-                        title: "Dribble the defender to have better chances>",
-                        children:[
-                            {
-                                node: "s6",
-                                title: "Shoot you have more ",
-                                endType: "Shoot"
-                            },
-                            {
-                                node:"s7",
-                                title: "Pass to Pedri. He is the best option",
-                                endType: "Pass"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
+playerToPass;
+dTree
+// dTree = {
+//         node: "s1",
+//         title: "Here is your opportunity to shine. Take the right decision to help your team win: ",
+//         children: [
+//             {
+//                 node: "s2",
+//                 title: "Shoot to score for your team",
+//                 endType: "Shoot"
+//             },
+//             {
+//                 node: "s3",
+//                 title: "Pass the ball to one of your teammates>",
+//                 children:[
+//                     {
+//                         node: "s4",
+//                         title: `Pass the ball to ${this.playerToPass}`,
+//                         endType: "Pass"
+//                     },
+//                     {
+//                         node: "s5",
+//                         title: "Dribble the defender to have better chances>",
+//                         children:[
+//                             {
+//                                 node: "s6",
+//                                 title: "Shoot you have more ",
+//                                 endType: "Shoot"
+//                             },
+//                             {
+//                                 node:"s7",
+//                                 title: `Pass to ${this.playerToPass}. He is the best option`,
+//                                 endType: "Pass"
+//                             }
+//                         ]
+//                     }
+//                 ]
+//             }
+//         ]
+//     }
 
-    constructor(){
-
+    constructor(playerToPass){
+        this.playerToPass = playerToPass.name
+        this.dTree = {
+            node: "s1",
+            title: "Here is your opportunity to shine. Take the right decision to help your team win: ",
+            children: [
+                {
+                    node: "s2",
+                    title: "Shoot to score for your team",
+                    endType: "Shoot"
+                },
+                {
+                    node: "s3",
+                    title: "Pass the ball to one of your teammates>",
+                    children:[
+                        {
+                            node: "s4",
+                            title: `Pass the ball to ${this.playerToPass}`,
+                            endType: "Pass"
+                        },
+                        {
+                            node: "s5",
+                            title: "Dribble the defender to have better chances>",
+                            children:[
+                                {
+                                    node: "s6",
+                                    title: "Shoot you have more ",
+                                    endType: "DShoot"
+                                },
+                                {
+                                    node:"s7",
+                                    title: `Pass to ${this.playerToPass}. He is the best option`,
+                                    endType: "DPass"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
     };
 
     getTitles(node){

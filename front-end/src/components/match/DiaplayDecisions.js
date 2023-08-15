@@ -2,12 +2,12 @@ import Decision from "../../logic/Decision"
 import { useState } from "react"
 
 
-const  DisplayDecisions = ({getDecisionEndPoint, decisionStatus})=>{
-    const callDecisions = new Decision()
+const  DisplayDecisions = ({getDecisionEndPoint, playerToPass})=>{
+    console.log(playerToPass)
+    const callDecisions = new Decision(playerToPass)
     const [decision,setDecision] = useState("s1")
     const [title, setTitle] = useState(callDecisions.getTitles(decision))
     const [options, setOptions] = useState(callDecisions.getChildren(decision))
-
 
     const onClickDecision=(event)=>{
     
@@ -16,7 +16,8 @@ const  DisplayDecisions = ({getDecisionEndPoint, decisionStatus})=>{
         setTitle(callDecisions.getTitles(event.target.name))
         setOptions(callDecisions.getChildren(event.target.name))
         console.log(event.target.name)
-        if(callDecisions.getTitles(event.target.name) === "Shoot"  || callDecisions.getTitles(event.target.name) === "Pass"){
+        if(callDecisions.getTitles(event.target.name) === "Shoot"  || callDecisions.getTitles(event.target.name) === "Pass" || 
+        callDecisions.getTitles(event.target.name) === "DShoot" || callDecisions.getTitles(event.target.name) === "DPass"){
             getDecisionEndPoint(callDecisions.getTitles(event.target.name));
         }
 

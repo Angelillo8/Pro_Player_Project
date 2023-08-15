@@ -1,9 +1,13 @@
 import PlayerDisplay from "./PlayerDisplay"
 
-const TeamDisplay = ({team})=>{
+const TeamDisplay = ({team, teamScorers})=>{
 
-const allPlayers = team.players.map((player, index)=>{
-    return <PlayerDisplay key={index} player = {player}  index = {index}/>
+  const teamArray = [team.gk]
+  teamArray.push(...team.def, ...team.mid, ...team.st)
+
+const allPlayers = teamArray.map((player, index)=>{
+  const howManyTimesScored = teamScorers.filter((scorer) => player.id === scorer.id)
+  return <PlayerDisplay key={index} player = {player}  index = {index} numberOfGoals={howManyTimesScored.length}/>
 })
 
 return(
@@ -13,9 +17,10 @@ return(
     <thead>
       <tr>
         <th></th>
+        <th>Number</th>
         <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
+        <th>Position</th>
+        <th>Goals</th>
       </tr>
     </thead>
     <tbody>

@@ -9,10 +9,7 @@ import Timer from './components/match/Timer';
 import PlayerDetails from './components/PlayerDetails';
 import './App.css';
 import PlayerSeasonStats from './components/PlayerSeasonStats.js';
-
-
-
-
+import LeagueTable from './components/LeagueTable';
 import ProplayerService from './services/ProplayerService';
 import LeaguesPage from './pages/LeaguesPage';
 import TeamPage from './pages/TeamPage'
@@ -20,19 +17,14 @@ import Match from './components/match/Match';
 import Decision from './logic/Decision';
 import DisplayDecisions from './components/match/DiaplayDecisions';
 import GameGenerator from './logic/GmeGenerator';
-
 import SubmitForm from './components/SubmitForm';
-
-
 import PlayerPage from './pages/PlayerPage';
 import EmailPage from './components/EmailPage';
 import LeagueCard from './components/LeagueCard';
 import HomePageCard from './components/HomePageCard';
-import LeagueTable from './components/LeagueTable';
-
-
 import NavBar from './components/NavBar';
 import PlayerDevelopment from './components/PlayerDevelopment';
+import { data } from 'autoprefixer';
 function App() {
 
   const [teams, setTeams] = useState([]);
@@ -40,26 +32,31 @@ function App() {
   let allMatchhesAreCreated = useRef(false)
   const [matches, setMatches] = useState()
   const [ourPlayer, setOurPlayer] = useState(null)
+  const [allMatchDates, setAllMatchDates] =useState([])
 
   console.log('ourPlayer :>> ', ourPlayer);
 
-  // const getTeams = () => {
-  //   ProplayerService.getTeams()
-  //     .then((teamsData) =>
-  //       setTeams(teamsData)
-  //     );
-  // };
+  const getTeams = () => {
+    ProplayerService.getTeams()
+      .then((teamsData) =>
+        setTeams(teamsData)
+      );
+  };
 
-  // useEffect(() => {
-  //   if (teams.length === 0) {
-  //     getTeams();
-  //   };
-  // }, [teams]);
+  useEffect(() => {
+    if (teams.length === 0) {
+      getTeams();
+    };
+  }, [teams]);
 
   const getOurPlayer = (player) => {
     setOurPlayer(player)
+    window.localStorage.setItem("ourPlayer", JSON.stringify(player))
   };
 
+  useEffect(()=>{
+    if (JSON.parse(localStorage.getItem("ourPlayer")) != null) setOurPlayer(JSON.parse(localStorage.getItem("ourPlayer")))
+  },[])
   const createSeason = () => {
     const startingSeason = { year: 2022 }
     if (!season.current) {
@@ -70,7 +67,7 @@ function App() {
 
   const generateAllGames = () => {
     if (season && teams.length > 40 && !allMatchhesAreCreated.current) {
-      let [championshipMatches, premierLeagueMatches] = GameGenerator(teams, season.current)
+      let [championshipMatches, premierLeagueMatches,generatedDates] = GameGenerator(teams, season.current)
       console.log("championshipMatches[1]", championshipMatches[1])
 
       for (let match of premierLeagueMatches) {
@@ -84,10 +81,12 @@ function App() {
       ProplayerService.getMatches()
         .then((allMatches) => setMatches(allMatches))
       allMatchhesAreCreated.current = true
+      setAllMatchDates(generatedDates)
     }
 
   }
-  // createSeason()
+  console.log("all dates are here", allMatchDates)
+  createSeason()
   // generateAllGames()
 
 
@@ -101,9 +100,7 @@ function App() {
           generateAllGames={generateAllGames}
           getOurPlayer={getOurPlayer}
         />} />
-        <Route path="/home" element={<HomePage 
-          ourPlayer={ourPlayer}
-        />} />
+        <Route path="/home/:id" element={<HomePage />} />
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/squad" element={<SquadPage squad={teams[1]} />} />
         <Route path="/player" element={<PlayerSeasonStats />} />
@@ -120,7 +117,7 @@ function App() {
         <Route path='/players/:playerId' element={<PlayerPage />} />
         <Route path="/player" element={<PlayerSeasonStats />} />
         <Route path='/decision' element={<DisplayDecisions />} />
-        <Route path="/match" element={<Match />} />
+        <Route path="/match/:matchId" element={<Match />} />
         {/* <Route path="/submit-form" element ={<SubmitForm 
         />}/> */}
         <Route path="/teams" element={<TeamPage />} />

@@ -7,8 +7,8 @@ const Scoring = (player, defender, gk)=>{
         let scoring = ""
         let scoringProbabilityTable = []
         let gkAVG = (gk.positioning + gk.diving + gk.reflexes)/3;
-        let defenderAVG = (defender.slideTackle + defender.standTackle)/2;
-        let playerAVG =  (player.shotPower + player.finishing + player.attPosition )/ 3;
+        let defenderAVG = (defender.slide_tackle + defender.stand_tackle)/2;
+        let playerAVG =  (player.shot_power + player.finishing + player.at_positioning )/ 3;
         let opponentsAVG = (gkAVG + defenderAVG)/2;
 
         if((opponentsAVG-7)<=playerAVG && (opponentsAVG+7)>=playerAVG){
@@ -48,7 +48,7 @@ const Scoring = (player, defender, gk)=>{
 
         scoring = scoringProbabilityTable[getRandomInt(0,10)]
         if (scoring === "S"){
-            console.log("GOALLLL")
+            console.log("GOALLLL this is a nice GOAL")
             return true
         }else{
             console.log("Missed faking idiot")
