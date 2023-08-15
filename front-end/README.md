@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+Pro Player - Interactive Football Player Application
+Pro Player
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Overview
+Pro Player is an interactive application where users can create their own virtual football player and guide them through a season of matches. The objective is to improve the player's performance and stats by earning experience points (exp) after each match. Users can strategically upgrade their player's skills using the accumulated exp. Additionally, the project includes a dynamic league table that reflects the results of the user's team and other competing teams.
 
-## Available Scripts
+Features
+Create Your Player: Users can create their own virtual football player, customising attributes such as age, position, and preferred foot.
 
-In the project directory, you can run:
+Season Matches: Guide your player through a season of virtual matches, competing against other teams.
 
-### `npm start`
+Earn Experience Points: After each match, your player earns experience points (exp) based on their performance.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Upgrade Player Skills: Strategically allocate earned exp to upgrade your player's skills, such as shooting, passing, and defending.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Dynamic League Table: The app features a dynamic league table that reflects the results and standings of all competing teams.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Tech Stack
+Frontend
+React
+Tailwind CSS
+Daisy UI
+Ant Design
 
-### `npm run build`
+Backend
+Spring
+Before running the app locally, ensure you have the following installed:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Node.js
+MongoDB
+Daisy UI
+Ant design UI
+Tailwind CSS
+Setup Instructions
+Clone the repository to your local machine:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+git clone https://github.com/andrewlunbong/pro_player
+Change directory to the project folder:
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+cd pro_player
+Install frontend dependencies:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+npm install
+Install backend dependencies:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+cd backend
+npm install
+Start the backend server:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+npm run server
+Start the frontend development server:
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+npm start
+Open the app in your web browser at http://localhost:3000.
 
-### Analyzing the Bundle Size
+Contributors
+Ittiphon Lunbong
+Alex Ofori
+Angel Gonzalez
+Panos Tsamou
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Additional Libraries
+The following libraries were used in this project:
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Tailwind CSS
+Daisy UI
+Ant Design

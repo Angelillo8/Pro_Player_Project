@@ -6,119 +6,163 @@ const PlayerDevelopment = () => {
     <div className="m-auto mt-6 mb-6 w-10/12">
     <div>
       <div className="card card-side bg-base-100 shadow-xl col-span-2">
-        {/* <figure className="w-10"><img src="https://logowik.com/content/uploads/images/premier-league9031.jpg" alt="Movie" /></figure> */}
+      
         <div className="card-body">
+        <div className="avatar">
+          <div className="w-24 rounded">
+            <img src="https://www.pngfind.com/pngs/m/110-1102775_download-empty-profile-hd-png-download.png " />
+          </div>
+        </div>
+          <p>Name:</p>
           <p>Age:</p>
           <p>Position:</p>
-          <p>Preferred foot:</p>
-          <div className="card-actions justify-end">
+          <p>Preferred foot: Left</p>
+          <div className="card-actions absolute top-0 right-0">
             <button className="btn btn-primary">Overall</button>
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-4 ">
-      <div className="card shadow-xl col-span-1  ">
-        <div className="card-body ">
-          <h2 className="card-title ">Goalkeeper</h2>
-          <div className="grid grid-cols-2 ">
-          <p>Positioning</p>
-          <progress className="progress progress-error w-25" value={10} max="100"></progress>
-          <p>Gk Diving</p>
-          <progress className="progress progress-error w-25" value={10} max="100"></progress>
-          <p>Gk Handling</p>
-          <progress className="progress progress-error w-25" value={10} max="100"></progress>
-          <p>Gk Kicking</p>
-          <progress className="progress progress-error w-25" value={10} max="100"></progress>
-          <p>Gk Reflexes</p>
-          <progress className="progress progress-error w-25" value={10} max="100"></progress>
-          <div className="card-actions justify-end">
+      <div className="grid grid-cols-4">
+        <div className="card shadow-xl col-span-1">
+          <div className="card-body">
+            <h2 className="card-title">Goalkeeper</h2>
+            <div className="flex items-center">
+              <p className="w-1/2">Positioning</p>
+              <progress className="progress progress-error w-1/2" value={10} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Gk Diving</p>
+              <progress className="progress progress-error w-1/2" value={10} max="100"></progress>            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Gk Handling</p>
+              <progress className="progress progress-error w-1/2" value={10} max="100"></progress>            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Gk Kicking</p>
+              <progress className="progress progress-error w-1/2" value={10} max="100"></progress>            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Gk Reflexes</p>
+              <progress className="progress progress-error w-1/2" value={10} max="100"></progress>            </div>
+            <div className="card-actions justify-end"></div>
           </div>
-        </div>
-        </div>
-      </div>
-      <div className="card shadow-xl col-span-1">
-        <div className="card-body ">
-          <h2 className="card-title ">Defence</h2>
-          <div className="grid grid-cols-2">
-          <p>Slid Tackle</p>
-          <progress className="progress progress-error w-25" value={70} max="100"></progress>
-          <p>Standing Tackle</p>
-          <progress className="progress progress-error w-25" value={62} max="100"></progress>
-          <p>Strength</p>
-          <progress className="progress progress-error w-25" value={65} max="100"></progress>
-          <p>Jumping</p>
-          <progress className="progress progress-error w-25" value={60} max="100"></progress>
-          <p>Interception</p>
-          <progress className="progress progress-error w-25" value={70} max="100"></progress>
-          <p>Aggression</p>
-          <progress className="progress progress-warning w-25" value={45} max="100"></progress>
-          <p>Reaction</p>
-          <progress className="progress progress-warning w-25" value={50} max="100"></progress>
-          <p>Heading</p>
-          <progress className="progress progress-warning w-25" value={55} max="100"></progress>
-          <div className="card-actions justify-end">
-          
           </div>
-        </div>
-        </div>
-      </div>
-      <div className="card shadow-xl col-span-1">
-        <div className="card-body ">
-          <h2 className="card-title ">Midfield</h2>
-          <div className="grid grid-cols-2 ">
-          
-          <p>Short Pass</p>
-          <progress className="progress progress-error w-25" value={70} max="100"></progress>
-          <p>Long Pass</p>
-          <progress className="progress progress-error w-25" value={62} max="100"></progress>
-          <p>Ball Control</p>
-          <progress className="progress progress-error w-25" value={65} max="100"></progress>
-          <p>Dribbling</p>
-          <progress className="progress progress-error w-25" value={60} max="100"></progress>
-          <p>Vision</p>
-          <progress className="progress progress-error w-25" value={70} max="100"></progress>
-          <p>Sprint</p>
-          <progress className="progress progress-warning w-25" value={45} max="100"></progress>
-          <p>Agility</p>
-          <progress className="progress progress-warning w-25" value={50} max="100"></progress>
-          <p>Stamina</p>
-          <progress className="progress progress-warning w-25" value={55} max="100"></progress>
-          <div className="card-actions justify-end">
-          
+        <div className="card shadow-xl col-span-1">
+          <div className="card-body">
+            <h2 className="card-title">Defence</h2>
+            <div className="flex items-center">
+              <p className="w-1/2">Slid Tackle</p>
+              <progress className="progress progress-warning w-1/2" value={10} max="100"></progress> 
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Standing Tackle</p>
+              <progress className="progress progress-warning w-1/2" value={10} max="100"></progress> 
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Strength</p>
+              <progress className="progress progress-warning w-1/2" value={10} max="100"></progress> 
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Jumping</p>
+              <progress className="progress progress-warning w-1/2" value={10} max="100"></progress> 
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Interception</p>
+              <progress className="progress progress-warning w-1/2" value={10} max="100"></progress> 
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Aggression</p>
+              <progress className="progress progress-warning w-1/2" value={10} max="100"></progress> 
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Reaction</p>
+              <progress className="progress progress-warning w-1/2" value={10} max="100"></progress> 
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Heading</p>
+              <progress className="progress progress-warning w-1/2" value={10} max="100"></progress> 
+            </div>
+            <div className="card-actions justify-end"></div>
           </div>
-        </div>
-        </div>
-      </div>
-      <div className="card shadow-xl col-span-1">
-        <div className="card-body ">
-          <h2 className="card-title ">Attack</h2>
-          <div className="grid grid-cols-2 ">
-          <p>Finishing</p>
-          <progress className="progress progress-error w-25" value={70} max="100"></progress>
-          <p>Shot Power</p>
-          <progress className="progress progress-error w-25" value={62} max="100"></progress>
-          <p>Curve</p>
-          <progress className="progress progress-error w-25" value={65} max="100"></progress>
-          <p>Long Shots</p>
-          <progress className="progress progress-error w-25" value={60} max="100"></progress>
-          <p>Penalties</p>
-          <progress className="progress progress-error w-25" value={70} max="100"></progress>
-          <p>Volleys</p>
-          <progress className="progress progress-warning w-25" value={45} max="100"></progress>
-          <p>Free Kicks</p>
-          <progress className="progress progress-warning w-25" value={50} max="100"></progress>
-          <p>Stamina</p>
-          <progress className="progress progress-warning w-25" value={55} max="100"></progress>
-          <div className="card-actions justify-end">
-          
           </div>
-        </div>
-        </div>
-      </div>
-
+        <div className="card shadow-xl col-span-1">
+          <div className="card-body">
+            <h2 className="card-title">Midfield</h2>
+            <div className="flex items-center">
+              <p className="w-1/2">Short Pass</p>
+              <progress className="progress progress-success w-1/2" value={65} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Long Pass</p>
+              <progress className="progress progress-success w-1/2" value={65} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Ball Control</p>
+              <progress className="progress progress-success w-1/2" value={65} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Dribbling</p>
+              <progress className="progress progress-success w-1/2" value={65} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Vision</p>
+              <progress className="progress progress-success w-1/2" value={65} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Sprint Speed</p>
+              <progress className="progress progress-success w-1/2" value={65} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Agility</p>
+              <progress className="progress progress-success w-1/2" value={65} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Stamina</p>
+              <progress className="progress progress-success w-1/2" value={65} max="100"></progress>
+            </div>
+            <div className="card-actions justify-end"></div>
+          </div>
+          </div>
+        <div className="card shadow-xl col-span-1">
+          <div className="card-body">
+            <h2 className="card-title">Attack</h2>
+            <div className="flex items-center">
+              <p className="w-1/2">Finishing</p>
+              <progress className="progress progress-warning w-1/2" value={67} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Shot Power</p>
+              <progress className="progress progress-warning w-1/2" value={67} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Curve</p>
+              <progress className="progress progress-warning w-1/2" value={67} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Long Shots</p>
+              <progress className="progress progress-warning w-1/2" value={67} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Penalties</p>
+              <progress className="progress progress-warning w-1/2" value={67} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Volleys</p>
+              <progress className="progress progress-warning w-1/2" value={67} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Free Kicks</p>
+              <progress className="progress progress-warning w-1/2" value={67} max="100"></progress>
+            </div>
+            <div className="flex items-center">
+              <p className="w-1/2">Crossing</p>
+              <progress className="progress progress-warning w-1/2" value={67} max="100"></progress>
+            </div>
+            <div className="card-actions justify-end"></div>
+          </div>
+          </div>
     </div>
     </div>
     </div>
+    
   );
 };
 

@@ -60,6 +60,30 @@ return(
         <td>9</td>
         <td>75</td>
       </tr>
+      <tr>
+      <th>4</th> 
+        <td>Liverpool</td> 
+        <td></td> 
+        <td></td> 
+        <td></td> 
+        <td>38</td> 
+        <td>19</td>
+        <td>14</td>
+        <td>9</td>
+        <td>71</td>
+      </tr>
+      <tr>
+      <th>5</th> 
+        <td>Man Utd</td> 
+        <td></td> 
+        <td></td> 
+        <td></td> 
+        <td>38</td> 
+        <td>19</td>
+        <td>10</td>
+        <td>9</td>
+        <td>67</td>
+      </tr>
       </tbody> 
     </table>
 </div>

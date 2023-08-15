@@ -7,10 +7,10 @@ const EmailPage = () => {
     <div className="grid grid-rows-6 grid-col-2 gap-2 ">
       <div className="card shadow-xl ">
         <div className="card-body  ">
-          <p>Date:</p>
-          <p>From:</p>
-          <p>To:</p>
-          <p>Subject:</p>
+          <p>Date: 20/07/2023</p>
+          <p>From: Manager</p>
+          <p>To: Angelito</p>
+          <p>Subject: Season Objective</p>
           <div className="card-actions">
           </div>
         </div>
@@ -19,20 +19,16 @@ const EmailPage = () => {
       
       <div className="card shadow-xl row-span-6 ">
       <figure className="px-10 pt-7">
-        <img src="https://fifastatic.fifaindex.com/FIFA23/teams/light/10.png" alt="Logo"  />
+        <img src="https://fifastatic.fifaindex.com/FIFA23/teams/light/1.png" alt="Logo"  />
       </figure>
         <div className="card-body ">
           {/* <h2 className="card-title">News</h2> */}
           <p class="text-left"> Good Afternoon Angelito,<br></br>
 
-I hope this email finds you in good spirits. As the season comes to a close, 
-I wanted to take a moment to review your performance in our FIFA Career Mode journey. 
-It has been an eventful and exciting season, and I am pleased to provide you with an 
-overview of your progress and achievements. Throughout the season, you have exhibited 
-tremendous dedication, skill, and commitment on the virtual pitch. Your performance has 
-been exceptional, and your contributions to the team have been invaluable. <br></br>
+          Hope you're doing well. With the new season just around the corner, I wanted to outline our objectives for the upcoming season. Your performance last season was exceptional, and I'm confident you'll continue to shine. This season, we're setting a goal for you to score a minimum of 15 goals and provide at least 10 assists. Your goal-scoring ability and playmaking skills are top-notch, and I know you can achieve this. Your positive presence on the pitch and leadership will be essential in motivating the team. Keep up the hard work and dedication to make this season even more memorable. Looking forward to a successful season ahead! <br></br>
 
-Yours Sincerely
+Best regards, <br></br>
+
 Manager</p>
           <div className="card-actions"></div>
         </div>

@@ -10,7 +10,6 @@ import PlayerDetails from './components/PlayerDetails';
 import './App.css';
 import PlayerSeasonStats from './components/PlayerSeasonStats.js';
 import LeagueTable from './components/LeagueTable';
-import LeagueTableCard from './components/LeagueTableCard';
 import ProplayerService from './services/ProplayerService';
 import LeaguesPage from './pages/LeaguesPage';
 import TeamPage from './pages/TeamPage'
@@ -22,6 +21,7 @@ import SubmitForm from './components/SubmitForm';
 import PlayerPage from './pages/PlayerPage';
 import EmailPage from './components/EmailPage';
 import LeagueCard from './components/LeagueCard';
+import HomePageCard from './components/HomePageCard';
 import NavBar from './components/NavBar';
 import PlayerDevelopment from './components/PlayerDevelopment';
 import { data } from 'autoprefixer';

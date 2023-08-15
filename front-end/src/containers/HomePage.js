@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import LeagueTable from '../components/leaguetable/LeagueTable';
 import NavBar from '../components/NavBar';
-import LeagueTableCard from '../components/LeagueTableCard';
+import HomePageCard from '../components/HomePageCard';
 import EmailPage from '../components/EmailPage';
 import PlayerDevelopment from '../components/PlayerDevelopment';
 import ProplayerService from '../services/ProplayerService';
@@ -29,7 +29,11 @@ const HomePage = () => {
   },[])
   return (
     <div className="home-container h-screen">
-     {ourPlayer?<LeagueTableCard ourPlayer={ourPlayer} date = {allMatchDates[0]}/>:null}
+     {ourPlayer?<HomePageCard ourPlayer={ourPlayer} date = {allMatchDates[0]}/>:null}
+     {/* <HomePageCard/>
+     <EmailPage/>
+     <PlayerDevelopment/>
+     <LeagueTableCard ourPlayer={ourPlayer}/> */}
     </div>
   );
 };
