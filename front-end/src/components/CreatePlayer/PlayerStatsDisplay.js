@@ -44,9 +44,9 @@ const PlayerStatsDisplay = ({stats, player, setFormData, formData, points, setPo
             </div>
             <div className={"border-solid  rounded-lg w-15 h-10 text-white  text-center items-center flex  " + colourToSkills(formData[stats])} id={`${stats}`} >
                 
-                    <button className="h-fit m-0 p-0 h-10 border-solid border-white border-r-4 rounded-l-lg bg-gray-400"  disabled = {formData[stats] === player[stats]} name = "decrease" onClick={handleClick}> <TbArrowBadgeLeftFilled color='gray' size={20} /> </button>
+                    <button className=" m-0 p-0 h-10 border-solid border-white border-r-4 rounded-l-lg bg-gray-400"  disabled = {formData[stats] === player[stats]} name = "decrease" onClick={handleClick}> <TbArrowBadgeLeftFilled color='gray' size={20} /> </button>
                         <p className=" p-2">{formData[stats]}</p>
-                    <button className="h-fit m-0 p-0 h-10 border-solid border-white border-l-4 rounded-r-lg bg-gray-400 " disabled = {points === 0} name = "increase" onClick={handleClick}><TbArrowBadgeRightFilled color='gray' size={20}/></button>
+                    <button className=" m-0 p-0 h-10 border-solid border-white border-l-4 rounded-r-lg bg-gray-400 " disabled = {points === 0} name = "increase" onClick={handleClick}><TbArrowBadgeRightFilled color='gray' size={20}/></button>
             
             </div>
            

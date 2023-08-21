@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import PlayersInfo from "./PlayersInfo";
 import TeamInfo from "./TeamInfo";
 import PlayerStats from "./PlayerStats";
-import { stat } from "@babel/core/lib/gensync-utils/fs";
+
 
 // function calculateOverall(formData){
 //   const listOfTheStats = ["positioning", "diving", "handling", "kicking", "reflexes", "reactions", "composure",
