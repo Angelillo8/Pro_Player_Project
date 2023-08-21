@@ -17,7 +17,7 @@ import Match from './components/match/Match';
 import Decision from './logic/Decision';
 import DisplayDecisions from './components/match/DiaplayDecisions';
 import GameGenerator from './logic/GmeGenerator';
-import SubmitForm from './components/SubmitForm';
+import SubmitForm from './components/CreatePlayer/SubmitForm';
 import PlayerPage from './pages/PlayerPage';
 import EmailPage from './components/EmailPage';
 import LeagueCard from './components/LeagueCard';
