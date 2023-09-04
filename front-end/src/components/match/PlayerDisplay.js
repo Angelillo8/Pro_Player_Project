@@ -1,12 +1,13 @@
-const PlayerDisplay = ({player, index})=>{
+const PlayerDisplay = ({player, index, numberOfGoals})=>{
 
     return(
         
      <tr>
-        <th>1</th>
+        <th>{index + 1}</th>
+        <td>{player.kit_number}</td>
         <td>{player.name}</td>
         <td>{player.position}</td>
-        <td>Blue</td>
+        <td> {numberOfGoals}</td>
       </tr>
     )
 

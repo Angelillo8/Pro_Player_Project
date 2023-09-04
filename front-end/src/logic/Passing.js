@@ -5,12 +5,12 @@ const Passing = (player, defender)=>{
     let missingProbability = 0;
     let passing =""
     let passingProbabilityTable = []
-    const defenderAVG = (defender.slideTackle + defender.standTackle)/2;
-    const playerAVG =  (player.shotPower + player.finishing + player.attPosition )/ 3;
+    const defenderAVG = (defender.slide_tackle + defender.stand_tackle)/2;
+    const playerAVG =  (player.short_pass + player.crossing + player.at_positioning + player.vision )/ 3;
 
     if((defenderAVG-7)<=playerAVG && (defenderAVG+7)>=playerAVG){
-        passingProbability = 5;
-        missingProbability = 10-5;
+        passingProbability = 6;
+        missingProbability = 10-6;
         for (let i=0; i< passingProbability; i++){
             passingProbabilityTable.push("P")
         }

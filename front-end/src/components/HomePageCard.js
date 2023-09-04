@@ -2,11 +2,14 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import LeagueTable from "./LeagueTable";
 import PlayerDevelopment from "./PlayerDevelopment";
+import AllMatchesOfWeek from "./weeklyMatches/AllMatchesOfWeek";
 
-const HomePageCard = () => {
-const LeagueTableCard = ({ourPlayer}) => {
+const HomePageCard = ({ourPlayer, date}) => {
+
+
   return (
-    <div className="m-auto mt-6 mb-6 w-10/12 ">
+    <>{ourPlayer&&(
+    <div className="m-auto mt-6 mb-6 w-10/12">
 
     <div className="grid grid-cols-3  grid-rows-2 gap-2 gap-y-7">
       
@@ -19,14 +22,17 @@ const LeagueTableCard = ({ourPlayer}) => {
             <p>Saturday, Aug 12, 2023</p>
             <p>AWAY vs Mancity</p>
             <div className="card-actions">
-              <Link to="/match" className="btn btn-primary">Play Match</Link>
+              <Link to="/match/" className="btn btn-primary">Play Match</Link>
             </div>
           </div>
         </div>
 
         <div className="card  shadow-xl col-span-2  ">
+          <figure className="px-10 pt-10">
+          </figure>
           <div className="card-body items-center text-center">
             <h2 className="card-title">News</h2>
+            <AllMatchesOfWeek date={date}/>
             <div className="card-actions"></div>
           </div>
         </div>
@@ -68,6 +74,8 @@ const LeagueTableCard = ({ourPlayer}) => {
       
     </div>
     </div>
+    )}
+    </>
   );
 };
 

@@ -26,7 +26,7 @@ const ProplayerService = {
   },
 
   updatePlayer(payload) {
-    return fetch(baseURL + "players/" + payload._id, {
+    return fetch(baseURL + "players/" + payload.id, {
       method: 'PUT',
       body: JSON.stringify(payload),
       headers: {
@@ -79,7 +79,12 @@ const ProplayerService = {
   },
 
   getOneMatch(id) {
+    console.log(id)
     return fetch(baseURL + "matches/" + id)
+      .then(res => res.json());
+  },
+  getMatchesByDate(date) {
+    return fetch(baseURL + "matches/date/" + date)
       .then(res => res.json());
   },
 
